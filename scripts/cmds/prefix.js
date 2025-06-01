@@ -1,142 +1,127 @@
 const fs = require("fs-extra");
-const moment = require("moment-timezone");
 const { utils } = global;
 
 module.exports = {
   config: {
     name: "prefix",
     version: "1.5",
-    author: "NTKhang",
+    author: "Ntkhang",
     countDown: 5,
     role: 0,
-    description: "Change the bot prefix in your chat box or globally (admin only)",
-    category: "⚙️ Configuration",
-    guide: {
-      en:
-        "┌─『 Prefix Settings 』─┐\n"
-      + "│\n"
-      + "│ 🔹 {pn} <prefix>\n"
-      + "│     Set prefix for this chat\n"
-      + "│     Example: {pn} $\n"
-      + "│\n"
-      + "│ 🔹 {pn} <prefix> -g\n"
-      + "│     Set global prefix (Admin only)\n"
-      + "│     Example: {pn} $ -g\n"
-      + "│\n"
-      + "│ ♻️ {pn} reset\n"
-      + "│     Reset to default prefix\n"
-      + "│\n"
-      + "└──────────────────────┘"
-    }
+    shortDescription: "⚙️ Change bot prefix",
+    longDescription: "Set custom prefix for your chat or globally (Admin only).",
+    category: "⚙️ Config"
   },
 
   langs: {
     en: {
-      reset:
-        "┌─『 Prefix Reset 』─┐\n"
-      + `│ 🦆 Reset to default: %1\n`
-      + "└────────────────────┘",
-      onlyAdmin:
-        "┌─『 Permission Denied 』─┐\n"
-      + "│ ⛔ Only bot admins can change global prefix!\n"
-      + "└──────────────────────────┘",
-      confirmGlobal:
-        "┌─『 Global Prefix Change 』─┐\n"
-      + "│ ⚙️ React to confirm global prefix update.\n"
-      + "└────────────────────────────┘",
-      confirmThisThread:
-        "┌─『 Chat Prefix Change 』─┐\n"
-      + "│ ⚙️ React to confirm this chat's prefix update.\n"
-      + "└──────────────────────────┘",
-      successGlobal:
-        "┌─『 Prefix Updated 』─┐\n"
-      + `│ 🦆 Global prefix: %1\n`
-      + "└─────────────────────┘",
-      successThisThread:
-        "┌─『 Prefix Updated 』─┐\n"
-      + `│ 🦆 Chat prefix: %1\n`
-      + "└─────────────────────┘",
-      myPrefix:
-        "┌─『 Current Prefix 』─┐\n"
-      + `│ 🌍 Global: %1\n`
-      + `│ 💬 This Chat: %2\n`
-      + "│\n"
-      + `│ ➤ Type: ${2}help\n`
-      + "└─────────────────────┘"
+      reset: "✅ Prefix reset to: 『 %1 』",
+      onlyAdmin: "⚠️ Only Admin can change global prefix!",
+      confirmGlobal: "🔹 React to confirm global prefix change.",
+      confirmThisThread: "🔹 React to confirm chat prefix change.",
     }
   },
 
-  onStart: async function ({ message, role, args, commandName, event, threadsData, getLang }) {
+  onStart: async function ({ message, role, args, event, threadsData, getLang }) {
     if (!args[0]) return message.SyntaxError();
-
-    if (args[0] === "reset") {
+    if (args[0] === 'reset') {
       await threadsData.set(event.threadID, null, "data.prefix");
       return message.reply(getLang("reset", global.GoatBot.config.prefix));
     }
 
     const newPrefix = args[0];
-    const formSet = {
-      commandName,
+    const settings = {
       author: event.senderID,
       newPrefix,
       setGlobal: args[1] === "-g"
     };
 
-    if (formSet.setGlobal && role < 2) {
+    if (settings.setGlobal && role < 2)
       return message.reply(getLang("onlyAdmin"));
-    }
 
-    const confirmMessage = formSet.setGlobal ? getLang("confirmGlobal") : getLang("confirmThisThread");
-    return message.reply(confirmMessage, (err, info) => {
-      formSet.messageID = info.messageID;
-      global.GoatBot.onReaction.set(info.messageID, formSet);
-    });
+    return message.reply(
+      getLang(settings.setGlobal ? "confirmGlobal" : "confirmThisThread"),
+      (err, info) => {
+        if (info) {
+          global.GoatBot.onReaction.set(info.messageID, {
+            ...settings,
+            messageID: info.messageID,
+            commandName: module.exports.config.name,
+            type: "prefixConfirm"
+          });
+        }
+      }
+    );
   },
 
-  onReaction: async function ({ message, threadsData, event, Reaction, getLang }) {
+  onReaction: async function ({ message, threadsData, event, Reaction }) {
     const { author, newPrefix, setGlobal } = Reaction;
     if (event.userID !== author) return;
+
+    const now = new Date().toLocaleString("en-GB", {
+      timeZone: "Asia/Dhaka",
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true
+    });
+
+    const resultBox =
+`╭━『 ✅ PREFIX UPDATED 』━╮
+┃ 🔸 Prefix : 『 ${newPrefix} 』
+┃ 🌐 Scope  : ${setGlobal ? "Global" : "Chat"}
+┃ ⏰ Time   : ${now}
+╰━━━━━━━━━━━━━━━━━━━╯`;
+
+    const imgUrl = "https://drive.google.com/uc?export=view&id=1YtPxR9fBCROAqDre-FL3o8AQiF-UujlG";
 
     if (setGlobal) {
       global.GoatBot.config.prefix = newPrefix;
       fs.writeFileSync(global.client.dirConfig, JSON.stringify(global.GoatBot.config, null, 2));
-      return message.reply(getLang("successGlobal", newPrefix));
+      return message.reply({
+        body: resultBox,
+        attachment: await global.utils.getStreamFromURL(imgUrl)
+      });
     }
 
     await threadsData.set(event.threadID, newPrefix, "data.prefix");
-    return message.reply(getLang("successThisThread", newPrefix));
+    return message.reply({
+      body: resultBox,
+      attachment: await global.utils.getStreamFromURL(imgUrl)
+    });
   },
 
-  onChat: async function ({ event, message, threadsData }) {
-    const globalPrefix = global.GoatBot.config.prefix;
-    const threadPrefix = await threadsData.get(event.threadID, "data.prefix") || globalPrefix;
+  onChat: async function ({ event, message, usersData }) {
+    if (event.body?.toLowerCase() !== "prefix") return;
 
-    if (event.body && event.body.toLowerCase() === "prefix") {
-      const currentTime = moment().tz("Asia/Dhaka").format("hh:mm A");
-      const uptimeMs = process.uptime() * 1000;
+    const { name } = await usersData.get(event.senderID);
+    const sysPrefix = global.GoatBot.config.prefix;
+    const currentPrefix = utils.getPrefix(event.threadID);
 
-      function formatUptime(ms) {
-        const sec = Math.floor(ms / 1000) % 60;
-        const min = Math.floor(ms / (1000 * 60)) % 60;
-        const hr = Math.floor(ms / (1000 * 60 * 60));
-        return `${hr}h ${min}m ${sec}s`;
-      }
+    const now = new Date().toLocaleString("en-GB", {
+      timeZone: "Asia/Dhaka",
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true
+    });
 
-      const uptime = formatUptime(uptimeMs);
+    const prefixBox =
+`╭━━━━『 𝐘𝐎𝐔𝐑 𝐁𝐀𝐁𝐘』━━━━╮
+┃ 🔰 𝚂𝚈𝚂𝚃𝙴𝙼 𝙿𝚁𝙴𝙵𝙸𝚇: 『 ${sysPrefix} 』
+┃ 🔰 𝚈𝙾𝚄𝚁 𝙱𝙾𝚇 𝙲𝙷𝙰𝚃 𝙿𝚁𝙴𝙵𝙸𝚇: 『 ${currentPrefix} 』
+┃ ⏰ 𝐓𝐈𝐌𝐄   : ${now}
+╰━━━━━━━━━━━━━━━━━━━╯`;
 
-      return message.reply({
-        body:
-` 🦆🦆🦆 𝗣𝗥𝗘𝗙𝗜𝗫 𝗜𝗡𝗙𝗢 🦆🦆🦆
-🦆 🆗 Global: ${globalPrefix}
-🦆 🔰 Chat: ${threadPrefix}
-🦆 🦆Help: ${threadPrefix}help
-🦆 🆙 Time: ${currentTime}
-🦆 🆙 Uptime: ${uptime}
-🦆 👤 Your ID: ${event.senderID}
-🦆 🆔 Dev: Fahad Obito
-🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆`,
-        attachment: await utils.getStreamFromURL("https://files.catbox.moe/vqf1fp.jpeg")
-      });
-    }
+    const imgUrl = "https://drive.google.com/uc?export=view&id=1YtPxR9fBCROAqDre-FL3o8AQiF-UujlG";
+
+    return message.reply({
+      body: `•╭•┄┅═════❁🦆❁═════┅┄•╮\n•—»🗿${name} 🗿«—•\n•╰•┄┅═════❁🦆❁═════┅┄•╯,\n\n•⋆✦⋆⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⋆✦⋆\n\n${prefixBox}\n\n•⋆✦⋆⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⋆✦⋆`,
+      attachment: await global.utils.getStreamFromURL(imgUrl)
+    });
   }
 };
