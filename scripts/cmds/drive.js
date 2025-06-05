@@ -1,54 +1,43 @@
 const axios = require('axios');
 
 module.exports = {
-	config: {
-		name: "drive",
-		version: "1.0.2",
-		author: "IMRAN",
-		countDown: 5,
-		role: 0,
-		description: {
-			en: "Upload a video and add it to Google Drive"
-		},
-		category: "utility",
-		guide: {
-			en: "   {pn} <link>: Add video from link to Google Drive\n   Reply to a message with media to upload"
-		}
-	},
+  config: {
+    name: "drive",
+    version: "0.0.1",
+    author: "ArYAN",
+    countDown: 5,
+    role: 0,
+    description: "Upload videos to Google Drive easily!",
+    category: "Utility",
+    guide: "Use: {pn} <link> to upload a video from a link\nOr reply to a video/message with media to upload"
+  },
 
-	langs: {
-		en: {
-			missingInput: "⚠️ Please provide a valid URL or reply to a message with media.",
-			uploadSuccess: "🦆 Successfully Uploaded to Google Drive!\n\n🔗 Direct URL: {url}\n🆔 File ID: {id}",
-			albumFail: "❌ Failed to retrieve file information.",
-			error: "⚠️ An error occurred during upload.\nError: {error}"
-		}
-	},
+  onStart: async function ({ message, event, args }) {
+    const inputUrl = event?.messageReply?.attachments?.[0]?.url || args[0];
 
-	onStart: async function ({ message, event, args, getLang }) {
-		const inputUrl = event?.messageReply?.attachments?.[0]?.url || args[0];
+    if (!inputUrl)
+      return message.reply("Please provide a valid video URL or reply to a media message.");
 
-		if (!inputUrl)
-			return message.reply(getLang("missingInput"));
+    try {
+      const noobx = "ArYAN";
+      const apiURL = `https://aryan-xyz-google-drive.vercel.app/drive?url=${encodeURIComponent(inputUrl)}&apikey=${noobx}`;
+      const res = await axios.get(apiURL);
 
-		try {
-			const res = await axios.get(
-				`https://glowing-octo-computing-machine-seven.vercel.app/api/upload?url=${encodeURIComponent(inputUrl)}`
-			);
-			
-			const { directLink, fileId } = res.data;
+      const data = res.data || {};
+      console.log("API response data:", data);
 
-			if (directLink && fileId) {
-				const successMessage = getLang("uploadSuccess")
-					.replace("{url}", directLink)
-					.replace("{id}", fileId);
-				return message.reply(successMessage);
-			}
+      const driveLink = data.driveLink || data.driveLIink;
 
-			message.reply(getLang("albumFail"));
-		} catch (error) {
-			console.error("Upload Error:", error);
-			message.reply(getLang("error").replace("{error}", error.message));
-		}
-	}
+      if (driveLink) {
+        const successMsg = `✅ File uploaded to Google Drive!\n\n🔗 URL: ${driveLink}`;
+        return message.reply(successMsg);
+      }
+
+      const errorMsg = data.error || JSON.stringify(data) || "Failed to upload the file.";
+      return message.reply(`Upload failed: ${errorMsg}`);
+    } catch (error) {
+      console.error("Upload Error:", error);
+      return message.reply("An error occurred during upload. Please try again.");
+    }
+  }
 };
