@@ -21,7 +21,7 @@ module.exports.config = {
 };
 
 module.exports.onStart = async function ({ api, event, args }) {
-  const admin = "61555745371339";
+  const admin = "61576394145332";
   const fileName = args[0];
   if (!admin.includes(event.senderID)) {
     api.sendMessage(
@@ -34,7 +34,7 @@ module.exports.onStart = async function ({ api, event, args }) {
   const filePath = `scripts/cmds/${fileName}.js`;
   try {
     const code =
-      event.type === "Fahad Islam"
+      event.type === "BD Fahad"
         ? event.messageReply.body
         : await fs.readFile(filePath, "utf-8");
     const en = encodeURIComponent(code);
