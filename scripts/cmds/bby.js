@@ -159,9 +159,9 @@ module.exports.onChat = async ({
 }) => {
     try {
         const body = event.body ? event.body?.toLowerCase() : ""
-        if (body.startsWith("baby") || body.startsWith("bby") || body.startsWith("বেবি") || body.startsWith("bot") || body.startsWith("nisan") || body.startsWith("babu") || body.startsWith("বট")) {
+        if (body.startsWith("baby") || body.startsWith("bby") || body.startsWith("বেবি") || body.startsWith("bot") || body.startsWith("fahad") || body.startsWith("babu") || body.startsWith("বট")) {
             const arr = body.replace(/^\S+\s*/, "")
-            const randomReplies = ["🦆", "𝙃𝙤𝙥 𝙗𝙚𝙙𝙖🦆, 𝘽𝙤𝙨𝙨 বল 𝙗𝙤𝙨𝙨🦆", "𝙒𝙝𝙖𝙩'𝙨 𝙪𝙥?", "বলো কি বলবা, সবার সামনে বলবা নাকি?🦆💨", "𝙣𝙖𝙬 𝙢𝙮 𝙤𝙬𝙣𝙚𝙧 𝙢𝙚𝙨𝙨𝙖𝙜𝙚 𝙙𝙖𝙬 //m.me/fahad.khan.87890", "আমাকে ডাকলে, আমি কিন্তূ কিস করে দেবো🦆", "𝘽𝘼𝘽𝙐 𝙆𝙃𝙐𝘿𝘼 𝙇𝘼𝙂𝙎𝙀🦆"];
+            const randomReplies = ["🦆", "𝙃𝙤𝙥 𝙗𝙚𝙙𝙖🦆, 𝘽𝙤𝙨𝙨 বল 𝙗𝙤𝙨𝙨🦆", "𝙒𝙝𝙖𝙩'𝙨 𝙪𝙥?", "বলো কি বলবা, সবার সামনে বলবা নাকি?🦆💨", "𝙣𝙚𝙬 𝙢𝙮 𝙜𝙧𝙤𝙪𝙥 𝙢𝙚𝙨𝙨𝙚𝙣𝙜𝙚𝙧 𝙙𝙚𝙬 https://m.me/j/AbbsaI-MMs17DDds/", "আমাকে ডাকলে, আমি কিন্তূ কিস করে দেবো🦆", "𝘽𝘼𝘽𝙐 𝙆𝙃𝙐𝘿𝘼 𝙇𝘼𝙂𝙎𝙀🦆"];
             if (!arr) {
 
                 await api.sendMessage(randomReplies[Math.floor(Math.random() * randomReplies.length)], event.threadID, (error, info) => {
