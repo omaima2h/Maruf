@@ -1,10 +1,10 @@
 module.exports.config = {
-    name: "chudi",
+    name: "fux",
     version: "1.0",
     role: 1,
     author: "Mesbah Bb'e",
     description: "5 বারের জন্য ক্রমাগত বন্ধুর ট্যাগ ট্যাগ করুন\nসেই ব্যক্তিকে আত্মা কলিং বলা যেতে পারে",
-    category: "nsfw",
+    category: "admin",
     guide: " please @mention",
     coolDown: 10
 }
