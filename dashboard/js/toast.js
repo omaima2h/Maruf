@@ -1,4 +1,4 @@
-.createToast = function ({
+$.createToast = function ({
 	title = "",
 	message = "",
 	type = "success",
