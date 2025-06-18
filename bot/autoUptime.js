@@ -1,4 +1,4 @@
-const axios = require('axios');
+onst axios = require('axios');
 const { config } = global.GoatBot;
 const { log, getText } = global.utils;
 if (global.timeOutUptime != undefined)
