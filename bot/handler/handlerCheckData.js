@@ -1,4 +1,4 @@
-onst { db, utils, GoatBot } = global;
+const { db, utils, GoatBot } = global;
 const { config } = GoatBot;
 const { log, getText } = utils;
 const { creatingThreadData, creatingUserData } = global.client.database;
