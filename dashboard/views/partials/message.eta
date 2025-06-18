@@ -1,6 +1,6 @@
 <% const { errors = [], success = [], warnings = [] } = E; %>
 
-<div id="toast"></div>
+<div id="toast"></div
 
 <% for (const err of errors) { %>
 <script>
