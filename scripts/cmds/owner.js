@@ -16,15 +16,15 @@ module.exports = {
 		envConfig: {}
 	},
 	onStart: async function ({ message }) {
-		const authorName = " ⩸_ 𝙵𝙰 𝙷 𝙰𝙳 _⩸ ";
-		const ownAge = "『 ⩸_ 17 _⩸ 』";
-		const messenger = " //m.me/fahad.khan.87890";
-		const authorFB = " //www.facebook.com/fahad.khan.87890";
-		const authorNumber = "01813999051";
-		const Status = "⩸____⩸";
+		const authorName = " ⩸_ m፝֟ꫝƦᏌꘘツ모 _⩸ ";
+		const ownAge = "『 ⩸_ 17± _⩸ 』";
+		const messenger = " Fb te ja halar put ";
+		const authorFB = " https://www.facebook.com/a.b.s.maruf.517296 ";
+		const authorNumber = "0160305****";
+		const Status = "⩸_ Amr kew nai re vai _⩸";
 		const urls = [
-"https://drive.google.com/uc?export=view&id=1mzJeualLnMS-wABThyCQFfJsX-2hMADG",
-"https://drive.google.com/uc?export=view&id=14M_Qx2OfCQhybST0tAzQ4QEqT7COD6Z1"
+"https://drive.google.com/uc?export=view&id=1GGQFVtn00J3hSLY2Nq5ptgD-XNMZHSAo",
+"https://drive.google.com/uc?export=view&id=1GGQFVtn00J3hSLY2Nq5ptgD-XNMZHSAo"
 ];
 		const link = urls[Math.floor(Math.random() * urls.length)];
 		const now = moment().tz('Asia/Jakarta');
@@ -50,7 +50,6 @@ module.exports = {
 \⏰彡𝑁𝑜𝑤 𝑇𝑖𝑚𝑒 : ${time}
 \🔰彡𝐴𝑛𝑦 𝐻𝑒𝑙𝑝 𝐶𝑜𝑛𝑡𝑎𝑐𝑡 : ${messenger}__⩸
 \📛彡𝐵𝑜𝑡 𝐼𝑠 𝑅𝑢𝑛𝑛𝑖𝑛𝑔 𝐹𝑜𝑟 : ${uptimeString}
-    𝑰𝒏𝒔𝒕𝒂:  //www.instagram.com/fahad.islam.2112112
 \===============`,
 			attachment: await global.utils.getStreamFromURL(link)
 		});
