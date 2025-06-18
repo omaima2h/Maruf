@@ -1,4 +1,4 @@
-const fs = require("fs-extra");
+onst fs = require("fs-extra");
 const nullAndUndefined = [undefined, null];
 // const { config } = global.GoatBot;
 // const { utils } = global;
