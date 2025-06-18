@@ -1,5 +1,4 @@
-<
-%~ includeFile("partials/header.eta", {
+<%~ includeFile("partials/header.eta", {
 	user: user
 }) %>
 <%~ includeFile("partials/message.eta") %>
