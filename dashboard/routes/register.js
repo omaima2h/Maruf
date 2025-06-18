@@ -1,4 +1,4 @@
-onst bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt");
 const expres = require("express");
 const router = expres.Router();
 
