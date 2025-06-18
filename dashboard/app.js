@@ -1,4 +1,4 @@
-onst express = require("express");
+const express = require("express");
 const app = express();
 const fileUpload = require("express-fileupload");
 const rateLimit = require("express-rate-limit");
