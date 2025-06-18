@@ -1,4 +1,4 @@
-module.exports = async function () {
+dule.exports = async function () {
 	const { Sequelize } = require("sequelize");
 	const path = __dirname + "/../data/data.sqlite";
 	const sequelize = new Sequelize({
