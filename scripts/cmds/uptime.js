@@ -55,7 +55,7 @@ module.exports = {
       const currentTime = moment.tz("Asia/Dhaka").format("DD/MM/YYYY || HH:mm:ss");
 
       // Create image
-      const background = await loadImage("https://i.imgur.com/6FJolgs.jpeg");
+      const background = await loadImage("https://i.imgur.com/bFhV28p.jpeg");
       const canvas = createCanvas(1000, 500);
       const ctx = canvas.getContext("2d");
 
