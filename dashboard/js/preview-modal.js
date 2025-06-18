@@ -1,4 +1,4 @@
-(document).on("click", ".preview-modal", function () {
+$(document).on("click", ".preview-modal", function () {
 	const thisEl = $(this);
 	const divModal = document.createElement("div");
 	divModal.innerHTML = `
