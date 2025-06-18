@@ -1,4 +1,4 @@
-<% const title = it.title || 'Dashboard' %
+<% const title = it.title || 'Dashboard' %>
 <% const icon = it.icon || 'fas fa-cog' %>
 
 <div class="bg-100 py-3">
