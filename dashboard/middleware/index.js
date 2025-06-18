@@ -1,4 +1,4 @@
-const { threadsData } = global.db;
+onst { threadsData } = global.db;
 
 function isPostMethod(req) {
 	return req.method == "POST";
