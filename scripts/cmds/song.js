@@ -8,9 +8,9 @@ const baseApiUrl = async () => {
 };
 module.exports = {
   config: {
-    name: "sing",
+    name: "sng",
     version: "1.1.5",
-    aliases: [ "music", "play", "song", "audio"],
+    aliases: [ "musics", "plays", "songs", "audios"],
     author: "dipto",
     countDown: 5,
     role: 0,
