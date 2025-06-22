@@ -1,4 +1,4 @@
-)cmd install hvd.js module.exports = {
+module.exports = {
         config: {
           name: "hvd",
           aliases: ["hvd"],
