@@ -5,7 +5,7 @@ const request = require("request");
 module.exports = {
   config: {
     name: "leave",
-    aliases: ["l"],
+    aliases: ["leaves"],
     version: "2.0", 
     author: "Vex_Kshitiz",
     countDown: 5,
