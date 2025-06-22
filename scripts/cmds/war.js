@@ -4,7 +4,7 @@ module.exports = {
     version: "1.0",
     author: "Xemon",
     role: 2,
-    category: "texts",
+    category: "admin",
     guide: {
       vi: "Not Available",
       en: "cpx @(mention)"
