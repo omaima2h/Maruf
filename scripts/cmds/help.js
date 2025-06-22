@@ -48,11 +48,11 @@ module.exports = {
 
       Object.keys(categories).forEach((category) => {
         if (category !== "info") {
-          msg += `\n╭─────❃『  ${category.toUpperCase()}  』`;
+          msg += `\n╭─────❃『  📛${category.toUpperCase()} 🦆💨 』`;
 
           const names = categories[category].commands.sort();
           for (let i = 0; i < names.length; i += 3) {
-            const cmds = names.slice(i, i + 2).map((item) => `[${item}]`);
+            const cmds = names.slice(i, i + 2).map((item) => `✨${item}✨`);
             msg += `\n│${cmds.join(" ".repeat(Math.max(1, 5 - cmds.join("").length)))}`;
           }
 
@@ -61,11 +61,11 @@ module.exports = {
       });
 
       const totalCommands = commands.size;
-      msg += `\n\n╭─────❃[🦆𝙴𝙽𝙹𝙾𝚈🦆] |[☪️𝚈𝙾𝚄𝚁 𝙵𝙰𝙷𝙰𝙳☪️]\n | [ 🦆𝙹𝙾𝙸𝙽 𝙾𝚄𝚁 𝙶𝚁𝙾𝚄𝙿 𝚃𝚈𝙿𝙴: ${prefix}𝚂𝚄𝙿𝙿𝙾𝚁𝚃𝙶𝙲 ]\n | [🦆𝙳𝙰𝚈𝚁𝙴𝙲𝚃 𝙶𝚁𝙾𝚄𝙿 𝙻𝙸𝙽𝙺: https://m.me/j/AbbsaI-MMs17DDds/ ]\n│>𝚃𝙾𝚃𝙰𝙻 𝙲𝙼𝙳𝚂: [🦆${totalCommands}🦆].\n│𝚃𝚈𝙿𝙴:[ 🦆${prefix}𝙷𝙴𝙻𝙿 𝚃𝙾🦆\n│🦆<𝙲𝙼𝙳> 𝚃𝙾 𝙻𝙴𝙰𝚁𝙽 𝚃𝙷𝙴 𝚄𝚂𝙰𝙶𝙴.]\n╰────────────✦`;
+      msg += `\n\n╭─────❃[🦆𝙴𝙽𝙹𝙾𝚈🦆] |[🅜🅐🅡🅤🅕]\n | [ 🦆𝙹𝙾𝙸𝙽 𝙾𝚄𝚁 𝙶𝚁𝙾𝚄𝙿 𝚃𝚈𝙿𝙴: ${prefix}𝚂𝚄𝙿𝙿𝙾𝚁𝚃𝙶𝙲 ]\n | [🧠𝙳𝙰𝚈𝚁𝙴𝙲𝚃 𝙶𝚁𝙾𝚄𝙿 𝙻𝙸𝙽𝙺: //m.me/j/AbZGfIdes8qdzjsy/ ]\n│>𝚃𝙾𝚃𝙰𝙻 𝙲𝙼𝙳𝚂: [🧠${totalCommands}🦆].\n│𝚃𝚈𝙿𝙴:[ 🦆${prefix}𝙷𝙴𝙻𝙿 𝚃𝙾🦆\n│🦆<𝙲𝙼𝙳> 𝚃𝙾 𝙻𝙴𝙰𝚁𝙽 𝚃𝙷𝙴 𝚄𝚂𝙰𝙶𝙴.]\n╰────────────✦`;
       msg += ``;
-      msg += `\n╭─────❃\n│ 🦆 | [𝙶𝙾𝙰𝚃𝙱𝙾𝚃]│𝙾𝚆𝙽𝙴𝚁 𝙵𝙱 𝙸𝙳: www.facebook.com/profile.php?id=/61576394145332 \n╰────────────✦`; 
+      msg += `\n╭─────❃\n│ 🌟 | [📛𝙶𝙾𝙰𝚃𝙱𝙾𝚃📛│𝙾𝚆𝙽𝙴𝚁 𝙵𝙱 𝙸𝙳: Id diya tor kam ki?😴😴😴\n╰────────────✦`; 
 
-      const attachment = await axios.get("https://drive.google.com/uc?export=view&id=1Bb8pWMY8juOjYsPj5MBn1UeLfu45vATR", { responseType: "stream" });
+      const attachment = await axios.get("https://drive.google.com/uc?export=view&id=11YkL_SqXVeSF_ZDEpqwiDmZ5z_LdZGlp", { responseType: "stream" });
 
       await message.reply({
         body: msg,
@@ -88,7 +88,7 @@ module.exports = {
         const guideBody = configCommand.guide?.en || "No guide available.";
         const usage = guideBody.replace(/{p}/g, prefix).replace(/{n}/g, configCommand.name);
 
-        const response = `╭── ⚠️𝐍𝐀𝐌𝐄⚠️ ────⭓
+        const response = `╭── ⚠𝐍𝐀𝐌𝐄⚠ ────⭓
  │ ${configCommand.name}
  ├── 🦆𝐈𝐧𝐟𝐨🦆
  │ 🔰 𝙾𝚃𝙷𝙴𝚁 𝙽𝙰𝙼𝙴𝚂: ${otherName}
@@ -100,8 +100,8 @@ module.exports = {
  │ 🔰𝙰𝚞𝚝𝚑𝚘𝚛: ${author}
  ├── 🔰𝐔𝐬𝐚𝐠𝐞🔰
  │ ${usage}
- ├──⚠️𝐍𝐨𝐭𝐞𝐬⚠️
- │ 🔳𝚃𝚑𝚎 𝚌𝚘𝚗𝚝𝚎𝚗𝚝 inside <𝙵𝙰𝙷𝙰𝙳> 𝚌𝚊𝚗 𝚋𝚎 𝚌𝚑𝚊𝚗𝚐𝚎𝚍
+ ├──⚠𝐍𝐨𝐭𝐞𝐬⚠
+ │ 🔳𝚃𝚑𝚎 𝚌𝚘𝚗𝚝𝚎𝚗𝚝 inside <𝙳𝙸𝙳𝙰𝚁> 𝚌𝚊𝚗 𝚋𝚎 𝚌𝚑𝚊𝚗𝚐𝚎𝚍
  │ 🔳𝚃𝚑𝚎 𝚌𝚘𝚗𝚝𝚎𝚗𝚝 inside [𝙰|𝙱|𝙲] 𝚒𝚜 𝚊 𝚘𝚛 𝚋 𝚘𝚛 𝚌
  ╰━━━━━━━❖`;
 
@@ -124,4 +124,4 @@ function roleTextToString(roleText) {
   }
   const wrapper = new GoatWrapper(module.exports);
 wrapper.applyNoPrefix({ allowPrefix: true });
-  }
+    }
