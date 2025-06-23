@@ -2,9 +2,7 @@
     {
         "key": "dbln",
         "value": "%7B%2261575913680852%22%3A%22zr8iSsUI%22%2C%2261576457682314%22%3A%224x6smdqq%22%2C%2261576887010502%22%3A%22nThMSF8H%22%2C%2261577130870107%22%3A%22neBCcwnE%22%2C%2261577204161172%22%3A%22n2Q66zDN%22%2C%2261577563236615%22%3A%22gtFS6uNn%22%2C%22100080934038160%22%3A%22S2Xe1wuK%22%7D",
-        "domain": "facebook.com",
-        "path": "/login/device-based/",
-        "hostOnly": false,
+se,
         "creation": "2025-06-22T18:03:44.595Z",
         "lastAccessed": "2025-06-22T18:03:44.595Z"
     },
