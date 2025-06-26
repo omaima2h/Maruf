@@ -71,7 +71,7 @@ module.exports = {
 				}
 
 			if ((uid1 === '61577924935571' || uid2 === '') && (uid1 !== '' && uid2 !== '')) {
-	uid1 = '61577924935571';
+	uid1 = '';
 	uid2 = '';
 	message.reply("sorry🥱💁 only Maruf can hug😌💗");
 							}
