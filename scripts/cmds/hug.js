@@ -70,7 +70,7 @@ module.exports = {
 						return message.reply("Please mention one or two users to send a hug gif.");
 				}
 
-			if ((uid1 === '61577924935571' || uid2 === '') && (uid1 !== '' && uid2 !== '')) {
+			if ((uid1 === '61577924935571' || uid2 === '61577917940077') && (uid1 !== '' && uid2 !== '')) {
 	uid1 = '';
 	uid2 = '';
 	message.reply("sorry🥱💁 only Maruf can hug😌💗");
